@@ -12,7 +12,7 @@ import { WebBrowser } from 'expo';
 
 // import { MonoText } from '../components/StyledText';
 import { MainText } from '../components/MainText';
-import { Campaign } from '../components/Campaign';
+import { CampaignTile } from '../components/CampaignTile';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -33,22 +33,21 @@ export default class HomeScreen extends React.Component {
           <View style={styles.campaignContainer}>
             <MainText style={styles.headerText}>My Campaigns</MainText>
             <View style={styles.myCampaignCollection}>
-              <Campaign />
-              <Campaign />
+              <CampaignTile source="https://placeimg.com/100/100/tech" />
+              <CampaignTile source="https://placeimg.com/100/100/animals"/>
             </View>
           </View>
 
           <View style={styles.campaignContainer}>
             <MainText style={styles.headerText}>Explore</MainText>
+            <View style={styles.exploreCollection}>
+
+            </View>
           </View>
 
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
-          <Text style={styles.tabBarInfoText}>
-            This is a tab bar. You can edit it in:
-          </Text>
-
           <View
             style={[styles.codeHighlightContainer, styles.navigationFilename]}>
           </View>
@@ -113,9 +112,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     flexDirection: 'column',
     marginLeft: 30,
+    marginBottom: 20
   },
   myCampaignCollection: {
     flexDirection: 'row',
+    alignItems: 'center',
+  },
+  exploreCollection: {
+    flexDirection: 'column',
   },
   welcomeContainer: {
     alignItems: 'center',
