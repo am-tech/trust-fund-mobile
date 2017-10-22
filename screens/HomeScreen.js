@@ -13,6 +13,7 @@ import { WebBrowser } from 'expo';
 // import { MonoText } from '../components/StyledText';
 import { MainText } from '../components/MainText';
 import { CampaignTile } from '../components/CampaignTile';
+import { CampaignRow } from '../components/CampaignRow';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -41,7 +42,9 @@ export default class HomeScreen extends React.Component {
           <View style={styles.campaignContainer}>
             <MainText style={styles.headerText}>Explore</MainText>
             <View style={styles.exploreCollection}>
-
+              <CampaignRow source="https://placeimg.com/500/100/nature" />
+              <CampaignRow source="https://placeimg.com/500/100/animals" />
+              <CampaignRow source="https://placeimg.com/500/100/architecture" />
             </View>
           </View>
 
