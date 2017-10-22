@@ -20,7 +20,36 @@ export default class HomeScreen extends React.Component {
     header: null,
   };
 
-  render() {
+  constructor () {
+    super();
+
+    this.state = {
+      campaigns: [
+        {
+          id: 1,
+          name: 'Campaign 1',
+          imageUrl: 'https://placeimg.com/100/100/tech',
+        },
+        {
+          id: 2,
+          name: 'Campaign 2',
+          imageUrl: 'https://placeimg.com/100/100/nature',
+        },
+        {
+          id: 3,
+          name: 'Campaign 3',
+          imageUrl: 'https://placeimg.com/100/100/architecture',
+        },
+        {
+          id: 4,
+          name: 'Campaign 4',
+          imageUrl: 'https://placeimg.com/100/100/animals',
+        },
+      ],
+    };
+  }
+
+  render () {
     return (
       <View style={styles.container}>
         <ScrollView
@@ -34,8 +63,18 @@ export default class HomeScreen extends React.Component {
           <View style={styles.campaignContainer}>
             <MainText style={styles.headerText}>My Campaigns</MainText>
             <View style={styles.myCampaignCollection}>
-              <CampaignTile source="https://placeimg.com/100/100/tech" />
-              <CampaignTile source="https://placeimg.com/100/100/animals"/>
+            {this.state.campaigns.map((campaign, key) => {
+              return (
+                <TouchableOpacity
+                  key={key}
+                  onPress={() => this._handleCampaignPress(campaign.id)}
+                >
+                  <CampaignTile
+                    source={campaign.imageUrl}
+                  />
+                </TouchableOpacity>
+              );
+            })}
             </View>
           </View>
 
@@ -51,9 +90,6 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
-          <View
-            style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          </View>
         </View>
       </View>
     );
@@ -86,6 +122,10 @@ export default class HomeScreen extends React.Component {
       'https://docs.expo.io/versions/latest/guides/development-mode'
     );
   };
+
+  _handleCampaignPress = (id) => {
+    this.props.navigation.navigate('Settings');
+  }
 
   _handleHelpPress = () => {
     WebBrowser.openBrowserAsync(

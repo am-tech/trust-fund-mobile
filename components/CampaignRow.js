@@ -6,7 +6,7 @@ export class CampaignRow extends React.Component {
     return (
       <View>
         <Image
-          style={{width: 500, height: 100, margin: 5, borderRadius: 5}}
+          style={{width: 300, height: 100, marginVertical: 5, borderRadius: 5}}
           source={{uri:this.props.source}}
           />
       </View>
