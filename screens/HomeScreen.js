@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   Image,
   Platform,
@@ -7,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
@@ -14,8 +16,9 @@ import { WebBrowser } from 'expo';
 import { MainText } from '../components/MainText';
 import { CampaignTile } from '../components/CampaignTile';
 import { CampaignRow } from '../components/CampaignRow';
+import { loadCampaigns, selectCampaign } from '../store/campaigns';
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -44,6 +47,10 @@ export default class HomeScreen extends React.Component {
     };
   }
 
+  componentDidMount () {
+    this.props.loadCampaigns();
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -57,20 +64,25 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.campaignContainer}>
             <MainText style={styles.headerText}>My Campaigns</MainText>
-            <View style={styles.myCampaignCollection}>
-            {this.state.campaigns.map((campaign, key) => {
-              return (
-                <TouchableOpacity
-                  key={key}
-                  onPress={() => this._handleCampaignPress()}
-                >
-                  <CampaignTile
-                    source={campaign.imageUrl}
-                  />
-                </TouchableOpacity>
-              );
-            })}
-            </View>
+            {this.props.isLoading
+              ? <ActivityIndicator />
+              : <View style={styles.myCampaignCollection}>
+                {this.props.myCampaigns.map((campaign, key) => {
+                  const imageUrl = campaign.items.length ? campaign.items[0].imageUrl : null;
+
+                  return (
+                    <TouchableOpacity
+                      key={key}
+                      onPress={() => this._handleCampaignPress(campaign.id)}
+                    >
+                      <CampaignTile
+                        source={imageUrl}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            }
           </View>
 
           <View style={styles.campaignContainer}>
@@ -117,7 +129,8 @@ export default class HomeScreen extends React.Component {
     );
   };
 
-  _handleCampaignPress = () => {
+  _handleCampaignPress = (id) => {
+    this.props.selectCampaign(id);
     this.props.navigation.navigate('Campaign');
   }
 
@@ -127,6 +140,23 @@ export default class HomeScreen extends React.Component {
     );
   };
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.campaigns.isLoading,
+    myCampaigns: state.campaigns.list,
+    allCampaigns: state.campaigns.list,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    selectCampaign: (id) => dispatch(selectCampaign(id)),
+    loadCampaigns: () => dispatch(loadCampaigns()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {

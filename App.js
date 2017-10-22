@@ -3,6 +3,10 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 import RootNavigation from './navigation/RootNavigation';
+import AppWrapper from './components/AppWrapper';
+import { createAppStore } from './store';
+
+const store = createAppStore();
 
 export default class App extends React.Component {
   state = {
@@ -20,12 +24,7 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          {Platform.OS === 'android' &&
-            <View style={styles.statusBarUnderlay} />}
-          <RootNavigation />
-        </View>
+        <AppWrapper store={store} />
       );
     }
   }

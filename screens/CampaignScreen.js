@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   ScrollView,
   StyleSheet,
@@ -8,7 +9,7 @@ import {
 import { MainText } from '../components/MainText';
 import { ItemTile } from '../components/ItemTile';
 
-export default class CampaignScreen extends React.Component {
+class CampaignScreen extends Component {
   static navigationOptions = {
     title: 'Campaign',
   };
@@ -45,7 +46,7 @@ export default class CampaignScreen extends React.Component {
       <View style={styles.container}>
         <ScrollView style={styles.formContainer}>
           <View>
-            <MainText style={styles.headerText}> My College List</MainText>
+            <MainText style={styles.headerText}>{this.props.campaign.name}</MainText>
             <MainText style={styles.subheaderText}> All the things I need for college! </MainText>
           </View>
           <View style={styles.alignRight}>
@@ -78,6 +79,15 @@ export default class CampaignScreen extends React.Component {
     this.state.navigation.navigate('Item');
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    campaign: state.campaigns.list
+      .find((campaign) => campaign.id === state.campaigns.selectedCampaignId),
+  };
+};
+
+export default connect(mapStateToProps)(CampaignScreen);
 
 const styles = StyleSheet.create({
   container: {
