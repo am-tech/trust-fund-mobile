@@ -6,7 +6,7 @@ export class CampaignTile extends React.Component {
     return (
       <View>
         <Image
-          style={{width: 100, height: 100, margin: 5, borderRadius: 5}}
+          style={{width: 90, height: 100, margin: 5, borderRadius: 5}}
           source={{uri:this.props.source}}
           />
       </View>

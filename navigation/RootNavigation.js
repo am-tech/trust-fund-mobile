@@ -4,6 +4,7 @@ import { StackNavigator } from 'react-navigation';
 
 import MainTabNavigator from './MainTabNavigator';
 import CampaignScreen from '../screens/CampaignScreen';
+import ItemSearchScreen from '../screens/ItemSearchScreen';
 import registerForPushNotificationsAsync from '../api/registerForPushNotificationsAsync';
 
 const RootStackNavigator = StackNavigator(
@@ -13,6 +14,9 @@ const RootStackNavigator = StackNavigator(
     },
     Campaign: {
       screen: CampaignScreen,
+    },
+    AddItem: {
+      screen: ItemSearchScreen,
     }
   },
   {

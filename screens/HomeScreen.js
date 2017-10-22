@@ -78,7 +78,6 @@ export default class HomeScreen extends React.Component {
             <View style={styles.exploreCollection}>
               <CampaignRow source="https://placeimg.com/500/100/nature" />
               <CampaignRow source="https://placeimg.com/500/100/animals" />
-              <CampaignRow source="https://placeimg.com/500/100/architecture" />
             </View>
           </View>
 
@@ -155,6 +154,8 @@ const styles = StyleSheet.create({
   myCampaignCollection: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: 300,
+    overflow: 'hidden'
   },
   exploreCollection: {
     flexDirection: 'column',
