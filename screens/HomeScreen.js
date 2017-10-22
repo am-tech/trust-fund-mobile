@@ -12,6 +12,7 @@ import { WebBrowser } from 'expo';
 
 // import { MonoText } from '../components/StyledText';
 import { MainText } from '../components/MainText';
+import { Campaign } from '../components/Campaign';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -31,6 +32,10 @@ export default class HomeScreen extends React.Component {
 
           <View style={styles.campaignContainer}>
             <MainText style={styles.headerText}>My Campaigns</MainText>
+            <View style={styles.myCampaignCollection}>
+              <Campaign />
+              <Campaign />
+            </View>
           </View>
 
           <View style={styles.campaignContainer}>
@@ -106,7 +111,11 @@ const styles = StyleSheet.create({
   },
   campaignContainer: {
     alignItems: 'flex-start',
+    flexDirection: 'column',
     marginLeft: 30,
+  },
+  myCampaignCollection: {
+    flexDirection: 'row',
   },
   welcomeContainer: {
     alignItems: 'center',
