@@ -39,12 +39,7 @@ export default class HomeScreen extends React.Component {
           id: 3,
           name: 'Campaign 3',
           imageUrl: 'https://placeimg.com/100/100/architecture',
-        },
-        {
-          id: 4,
-          name: 'Campaign 4',
-          imageUrl: 'https://placeimg.com/100/100/animals',
-        },
+        }
       ],
     };
   }
@@ -67,7 +62,7 @@ export default class HomeScreen extends React.Component {
               return (
                 <TouchableOpacity
                   key={key}
-                  onPress={() => this._handleCampaignPress(campaign.id)}
+                  onPress={() => this._handleCampaignPress()}
                 >
                   <CampaignTile
                     source={campaign.imageUrl}
@@ -123,8 +118,8 @@ export default class HomeScreen extends React.Component {
     );
   };
 
-  _handleCampaignPress = (id) => {
-    this.props.navigation.navigate('Settings');
+  _handleCampaignPress = () => {
+    this.props.navigation.navigate('Campaign');
   }
 
   _handleHelpPress = () => {
